@@ -7,11 +7,27 @@ function createGameboard() {
         board[i] = [];
         for(let j=0;j < columns; j++) {
             board[i].push(0);
+
+            let newSquare = document.createElement('div');
+            newSquare.classList.add(`gameSquare`);
+            newSquare.dataset.rowIndex = `${i}`;
+            newSquare.dataset.colIndex = `${j}`;
+            newSquare.addEventListener('mousedown', playerClick);
+
+            let boardContainer = document.getElementById("board_container");
+            boardContainer.appendChild(newSquare);
         };
     };
 
     return board;
 };
+
+const playerClick = () => {
+    const clickedSquare = event.currentTarget;
+    const squareRowIndex = clickedSquare.dataset.rowIndex;
+    const squareColIndex = clickedSquare.dataset.colIndex;
+    game.placeToken(squareRowIndex, squareColIndex);
+}
 
 function createPlayer(name, marker) {
     const playerName = name;
@@ -40,8 +56,8 @@ function gameControl() {
 
         if(gameBoard[row][column] === 0) {
             gameBoard[row][column] = marker;
+            event.currentTarget.textContent = marker;
             changeTurn();
-            console.log(gameBoard);
         } else {
             console.log("Spot already taken! Try again!");
         }
@@ -84,6 +100,14 @@ function gameControl() {
             state = '?';
         } else {
             state = "T";
+        }
+
+        if (state === '?') {
+
+        } else if (state === 'X' || state === 'O') {
+            console.log(`${state} is the winner!`);
+        } else if (state === 'T') {
+            console.log("Looks like it's a tie!");
         }
     }
 

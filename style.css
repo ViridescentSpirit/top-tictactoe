@@ -1,0 +1,26 @@
+html, body {
+    margin: 0;
+    padding: 0;
+}
+
+.header {
+    height: 25vh;
+}
+
+#board_container {
+    display: grid;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    grid-template-columns: repeat(3, 100px);
+}
+
+.gameSquare {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    height: 100px;
+    width: 100px;
+    border: solid black 2px;
+}
